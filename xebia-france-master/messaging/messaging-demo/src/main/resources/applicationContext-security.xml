@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--                                                                          -->
+<!-- Copyright 2007 Xebia and the original author or authors.                 -->
+<!--                                                                          -->
+<!-- Licensed under the Apache License, Version 2.0 (the "License");          -->
+<!-- you may not use this file except in compliance with the License.         -->
+<!-- You may obtain a copy of the License at                                  -->
+<!--                                                                          -->
+<!-- http://www.apache.org/licenses/LICENSE-2.0                               -->
+<!--                                                                          -->
+<!-- Unless required by applicable law or agreed to in writing, software      -->
+<!-- distributed under the License is distributed on an "AS IS" BASIS,        -->
+<!-- WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. -->
+<!-- See the License for the specific language governing permissions and      -->
+<!-- limitations under the License.                                           -->
+<!--                                                                          -->
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:sec="http://www.springframework.org/schema/security" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+                        http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-2.0.2.xsd">
+   <sec:http auto-config="true">
+      <sec:intercept-url pattern="/services/**" access="IS_AUTHENTICATED_FULLY, IS_AUTHENTICATED_REMEMBERED" />
+      <sec:intercept-url pattern="/**" access="IS_AUTHENTICATED_ANONYMOUSLY" />
+      <sec:anonymous/>
+      <sec:http-basic/>
+   </sec:http>
+    <!--
+    Usernames/Passwords are
+        rod/koala
+        dianne/emu
+        scott/wombat
+        peter/opal
+    -->
+   <sec:authentication-provider>
+      <sec:password-encoder hash="md5" />
+      <sec:user-service>
+         <sec:user name="rod" password="a564de63c2d0da68cf47586ee05984d7" authorities="" />
+         <sec:user name="dianne" password="65d15fe9156f9c4bbffd98085992a44e" authorities="" />
+         <sec:user name="scott" password="2b58af6dddbd072ed27ffc86725d7d3a" authorities="" />
+         <sec:user name="peter" password="22b5c9accc6e1ba628cedc63a72d57f8" authorities="" />
+      </sec:user-service>
+   </sec:authentication-provider>
+</beans>
